@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Carosel</title>
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+
+<style>
+* {
+  margin:0px;
+  padding:0px;
+  width:100%;
+}
+
+#header {
+  background-color: lightgrey;
+  height:800px;
+  text-align:center;
+  padding-top:750px;
+  box-sizing: border-box;
+  display: none;
+}
+
+body::-webkit-scrollbar { width: 0 !important }
+
+.overscrolling > #header {
+  position:fixed;
+  top:-800px;
+}
+
+.overscrolling > #content {
+  position:fixed;
+  top:0px;
+}
+
+.pan-left {
+  touch-action: pan-y pan-left;
+}
+
+.pan-right {
+  touch-action: pan-y pan-right;
+}
+
+.pan-y {
+  touch-action: pan-y;
+}
+
+.card {
+  width: 100px;
+  height: 100px;
+  background: grey;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 100px;
+}
+
+#content {
+  width: 500px;
+  white-space: nowrap;
+  overflow: scroll;
+  background: yellow;
+}
+
+#content-long {
+  width: 200px;
+  background: green;
+  height: 600px;
+}
+
+#lhs {
+  height: 300px;
+  background: red;
+}
+
+#rhs {
+  height: 300px;
+  background: blue;
+}
+
+</style>
+</head>
+<body>
+  <div id="content" class="pan-left">
+   <div id="lhs" class="card">Content on LHS</div>
+   <div id="card1" class="card">0</div>
+   <div id="card2" class="card">1</div>
+   <div id="card3" class="card">2</div>
+   <div id="rhs" class="card">Content on RHS</div>
+  </div>
+  <div id="content-long" />
+<script>
+var container = document.scrollingElement;
+var content = document.getElementById("content");
+
+var startTouchX;
+var startTouchY;
+var contentIndex = 0;
+
+function updateContent() {
+   document.getElementById("card1").innerHTML = contentIndex;
+   document.getElementById("card2").innerHTML = contentIndex + 1;
+   document.getElementById("card3").innerHTML = contentIndex + 2;
+}
+
+content.addEventListener("touchstart", function(e) {
+  touchStartX = e.touches[0].pageX;
+  touchStartY = e.touches[0].pageY;
+  console.log("touch start " + touchStartX + ", " + touchStartY);
+});
+
+content.addEventListener("touchmove", function(e) {
+  var touchX = e.touches[0].pageX;
+  var touchY = e.touches[0].pageY;
+
+  var lengthY = touchY - touchStartY;
+  var lengthX = touchX - touchStartX;
+
+  if (Math.abs(lengthY) > Math.abs(lengthX)) {
+    return;
+  }
+
+  if (lengthX < 0) { 
+    contentIndex++;
+    if (contentIndex > 47) {
+      contentIndex = 47;
+      content.className = "pan-right";
+    } else {
+      content.className = "pan-y";
+      updateContent();
+      e.preventDefault();
+    }
+  } else {
+    contentIndex--;
+    if (contentIndex < 0) {
+      contentIndex = 0;
+      content.className = "pan-left";
+    } else {
+      content.className = "pan-y";
+      updateContent();
+      e.preventDefault();
+    }
+  }
+});
+
+</script>
+</body>
+</html>
