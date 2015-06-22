@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<style>
+  iframe { width: 400px; height: 250px; margin 200px; }
+  #secondFrame { height: 70px; }
+  p:hover{ color: red; }
+</style>
+<body>
+<iframe src="./iframe_inner.html"></iframe>
+  <div>Main Frame Mouse Move Event: <div id="xx"></div></div>
+<iframe id=secondFrame src="./iframe_inner2.html"></iframe>
+
+<script>
+    document.body.addEventListener('mousemove', function(e) {
+      document.getElementById('xx').innerHTML = e.clientX + ' &times; ' + e.clientY;
+    });
+    document.body.addEventListener('mouseenter', function(e) {
+       console.log("Mouse enter main frame")
+    }
+    );
+    document.body.addEventListener('mouseleave', function(e) {
+       console.log("Mouse leave main frame");
+    });
+    document.body.addEventListener('mousedown', function(e) {
+       console.log("Mouse down main frame");
+    });
+    document.body.addEventListener('mouseup', function(e) {
+       console.log("Mouse up main frame");
+    });
+
+</script>
+</body>

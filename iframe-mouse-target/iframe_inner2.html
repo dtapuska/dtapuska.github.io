@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<style>
+  body, html { margin: 0; padding; 0; height 100%; background-color: #cbf; }
+  li:hover{color:red}
+</style>
+<body>
+  <button id="cka">Button A</button>
+  <button id="ckb">Button B</button>
+  <div>Inner frame mouse move <div id="xx"></div></div>
+</body>
+<script>
+  document.getElementById('cka').addEventListener('mousedown', function(e) {
+    window.console.log('Mouse Down Inner Frame 2!');
+  });
+
+  document.getElementById('ckb').addEventListener('mousedown', function(e) {
+    window.console.log('Mouse Down Inner Frame 2!');
+    e.preventDefault();
+  });
+
+  window.addEventListener('mouseup', function() {
+    console.log('Mouse Up Inner Frame 2!');
+  });
+  window.addEventListener('mousemove', function(e) {
+    document.getElementById('xx').innerHTML = e.clientX + ' &times; ' + e.clientY;
+  });
+
+  document.addEventListener('mouseenter', function(e) {
+    console.log("Mouse enter Inner Frame 2")
+  });
+  document.addEventListener('mouseleave', function(e) {
+    console.log("Mouse leave Inner Frame 2");
+  });
+
+</script>
+

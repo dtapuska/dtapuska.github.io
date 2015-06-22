@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<style>
+  body, html { margin: 0; padding; 0; height 100%; background-color: #cbf; }
+</style>
+<body>
+  <ol>
+    <li>Open JS console</li>
+    <li>Mouse down on <code>Button A</code></li>
+    <li>Drag mouse outside iframe</li>
+    <li>Release mouse button</li>
+    <li>Observe pattern of 'mousedown' and 'mouseup'</li>
+    <li>Repeat with <code>Button B</code></li>
+  </ol>
+  <button id="cka">Button A</button>
+  <button id="ckb">Button B</button>
+  <div>Inner frame mouse move <div id="xx"></div></div>
+</body>
+<script>
+  document.getElementById('cka').addEventListener('mousedown', function(e) {
+    window.console.log('Mouse Down Inner frame 1!');
+  });
+
+  document.getElementById('ckb').addEventListener('mousedown', function(e) {
+    window.console.log('Mouse Down Inner frame 1!');
+    e.preventDefault();
+  });
+
+  document.addEventListener('mouseenter', function(e) {
+    console.log("Mouse enter inner frame 1")
+  });
+  document.addEventListener('mouseleave', function(e) {
+    console.log("Mouse leave inner frame 1");
+  });
+  document.addEventListener('mouseup', function(e) {
+    console.log("Mouse up inner frame 1");
+  });
+  document.addEventListener('mousemove', function(e) {
+    document.getElementById('xx').innerHTML = e.clientX + ' &times; ' + e.clientY;
+  });
+
+</script>
+
