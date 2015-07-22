@@ -79,6 +79,7 @@ body::-webkit-scrollbar { width: 0 !important }
 }
 
 </style>
+<script src="pointerevent.shim.js"></script>
 </head>
 <body>
   <div id="content" class="pan-left">
@@ -93,8 +94,8 @@ body::-webkit-scrollbar { width: 0 !important }
 var container = document.scrollingElement;
 var content = document.getElementById("content");
 
-var startTouchX;
-var startTouchY;
+var startX;
+var startY;
 var contentIndex = 0;
 
 function updateContent() {
@@ -103,18 +104,14 @@ function updateContent() {
    document.getElementById("card3").innerHTML = contentIndex + 2;
 }
 
-content.addEventListener("touchstart", function(e) {
-  touchStartX = e.touches[0].pageX;
-  touchStartY = e.touches[0].pageY;
-  console.log("touch start " + touchStartX + ", " + touchStartY);
+content.addEventListener("pointerdown", function(e) {
+  startX = e.clientX;
+  startY = e.clientY;
 });
 
-content.addEventListener("touchmove", function(e) {
-  var touchX = e.touches[0].pageX;
-  var touchY = e.touches[0].pageY;
-
-  var lengthY = touchY - touchStartY;
-  var lengthX = touchX - touchStartX;
+content.addEventListener("pointermove", function(e) {
+  var lengthY = e.clientX - startX;
+  var lengthX = e.clientY - startY;
 
   if (Math.abs(lengthY) > Math.abs(lengthX)) {
     return;
@@ -128,7 +125,6 @@ content.addEventListener("touchmove", function(e) {
     } else {
       content.className = "pan-y";
       updateContent();
-      e.preventDefault();
     }
   } else {
     contentIndex--;
@@ -138,7 +134,6 @@ content.addEventListener("touchmove", function(e) {
     } else {
       content.className = "pan-y";
       updateContent();
-      e.preventDefault();
     }
   }
 });
