@@ -1,0 +1,79 @@
+<!doctype html>
+ <head>
+  <meta charset=utf-8>
+  <title>KeyboardEvent - US 101 KeyboardEvent.code test</title>
+  <style>
+    .testarea { margin: auto; width: 80%; height: 250px; border: 1px solid grey; position: relative; }
+
+    #start,#end { background-color: red; border: 1px solid black; margin: 0; padding: 0; }
+   /* start/end layout */
+   #start.green,#end.green { background-color: green; }
+   #start { position: absolute; left: 15%; top: 15%; width: 50%; height: 50%; }
+   #end { position: absolute; right: 15%; bottom: 15%; width: 50%; height: 50%; }
+  </style>
+  <script src="../../resources/testharness.js"></script>
+  <script src="../../resources/testharnessreport.js"></script>
+  <script>
+   setup({explicit_timeout: true});
+  </script>
+  <script src="../resources/eventrecorder.js"></script>
+ </head>
+ <body>
+ <p><strong>Description</strong>: Press every us-ascii key on the keyboard.</p>
+
+ <p><strong>Instructions</strong>: </p>
+ <ol>
+   <li>Run the keyboard generation script.
+ </ol>
+ <p><strong>Test Passes</strong> if both boxes turn green and the word 'PASS' appears below</p>
+
+ <section class="testarea">
+ </section>
+
+ <script>
+    EventRecorder.configure({
+      objectMap: {
+         "document": document
+      }
+    });
+
+
+    document.addRecordedEventListener('keydown', function (e) {
+      e.stopPropagation();
+      e.preventDefault();
+    });
+
+    document.addRecordedEventListener('keyup', function (e) {
+      e.stopPropagation();
+      e.preventDefault();
+      if (e.code === "End") {
+        endTest();
+        done();
+      }
+    });
+
+    function validateEvent(event, type, expected_key) {
+      assert_equals(event.type, type, type + " for key " + expected_key);
+      assert_equals(event.code, expected_key, "Code for key " + expected_key);
+    }
+
+    expected_keys = ["Backquote", "Backslash", "Backspace", "BracketLeft", "BracketRight", "Comma", "Digit0", "Digit1", "Digit2", "Digit3", "Digit4", "Digit5", "Digit6", "Digit7", "Digit8", "Digit9", "Equal", "KeyA", "KeyB", "KeyC", "KeyD", "KeyE", "KeyF", "KeyG", "KeyH", "KeyI", "KeyJ", "KeyK", "KeyL", "KeyM", "KeyN", "KeyO", "KeyP", "KeyQ", "KeyR", "KeyS", "KeyT", "KeyU", "KeyV", "KeyW", "KeyX", "KeyY", "KeyZ", "Minus", "Period", "Quote", "Semicolon", "Slash", "AltLeft", "AltRight", "ControlLeft", "ControlRight", "Enter", "ShiftLeft", "ShiftRight", "Space", "Tab", "Delete", "Insert", "PageDown", "PageUp", "ArrowDown", "ArrowUp", "ArrowLeft", "ArrowRight", "Numpad0", "Numpad1", "Numpad2", "Numpad3", "Numpad4", "Numpad5", "Numpad6", "Numpad7", "Numpad8", "Numpad9", "NumpadAdd", "NumpadDivide", "NumpadEnter", "NumpadMultiply", "NumpadSubtract", "End"];
+
+    function endTest() {
+      EventRecorder.stop();
+      var results = EventRecorder.getRecords();
+      // Check results:
+      i = 0;
+      expected_keys.forEach(function(key) {
+        ["keydown", "keyup"].forEach(function(type) {
+          validateEvent(results[i].event, type, key);
+          ++i;
+        });
+      });
+      assert_equals(results.length, (expected_keys.length * 2), "Correct number of keyboard events");
+    }
+
+    EventRecorder.start();
+  </script>
+ </body>
+</html>
