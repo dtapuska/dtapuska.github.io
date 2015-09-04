@@ -2,15 +2,6 @@
  <head>
   <meta charset=utf-8>
   <title>KeyboardEvent - US 101 KeyboardEvent.code test</title>
-  <style>
-    .testarea { margin: auto; width: 80%; height: 250px; border: 1px solid grey; position: relative; }
-
-    #start,#end { background-color: red; border: 1px solid black; margin: 0; padding: 0; }
-   /* start/end layout */
-   #start.green,#end.green { background-color: green; }
-   #start { position: absolute; left: 15%; top: 15%; width: 50%; height: 50%; }
-   #end { position: absolute; right: 15%; bottom: 15%; width: 50%; height: 50%; }
-  </style>
   <script src="../../resources/testharness.js"></script>
   <script src="../../resources/testharnessreport.js"></script>
   <script>
@@ -23,12 +14,9 @@
 
  <p><strong>Instructions</strong>: </p>
  <ol>
-   <li>Run the keyboard generation script.
+   <li>Run the keyboard generation script (See https://github.com/dtapuska/fakekey.git) with the us_101.txt file.
  </ol>
- <p><strong>Test Passes</strong> if both boxes turn green and the word 'PASS' appears below</p>
-
- <section class="testarea">
- </section>
+ <p><strong>Test Passes</strong> if the word 'PASS' appears below</p>
 
  <script>
     EventRecorder.configure({
