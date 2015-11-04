@@ -1,0 +1,70 @@
+<html>
+<body>
+<p>document.html + e.initTouchEvent(a); is iOSTouch? => <span id="text0"></span></p>
+<p>e.initTouchEvent(a); is iOSTouch? => <span id="text1"></span></p>
+<p>e.initTouchEvent(a, true, true, window, null, 0, 0, 0, 0, false, false, false, false,
+      null, null, null, 1, 0); is iOSTouch? => <span id="text2"></span></p>
+<br>
+<p>document.html => <span id="d-html"></span></p>
+</body>
+
+<script>
+
+var iOSTouch1 = (function() {
+    var a = "cantouch"
+      , c = document
+      , f = false;
+    if (!c.addEventListener) {
+        return false;
+    }
+    var d = function() {
+        c.removeEventListener(a, d, true);
+        f = true;
+    }
+    ;
+    try {
+        c.addEventListener(a, d, true);
+        var e = document.createEvent("TouchEvent");
+        e.initTouchEvent(a);
+        c.dispatchEvent(e);
+        return f;
+    } catch (b) {
+        alert(b);
+    }
+    d();
+    return false;
+}
+)();
+
+var iOSTouch2 = (function() {
+    var a = "cantouch"
+      , c = document.body
+      , f = false;
+    if (!c.addEventListener) {
+        return false;
+    }
+    var d = function() {
+        c.removeEventListener(a, d, true);
+        f = true;
+    }
+    ;
+    try {
+        c.addEventListener(a, d, true);
+        var e = document.createEvent("TouchEvent");
+        e.initTouchEvent(a, true, true, window, null, 0, 0, 0, 0, false, false, false, false,
+      null, null, null, 1, 0);
+        c.dispatchEvent(e);
+        return f;
+    } catch (b) {}
+    d();
+    return false;
+}
+)();
+
+document.getElementById('d-html').innerHTML = document.html;
+
+document.getElementById('text1').innerHTML = iOSTouch1;
+document.getElementById('text2').innerHTML = iOSTouch2;
+
+</script>
+</html>
