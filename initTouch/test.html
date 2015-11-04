@@ -20,18 +20,17 @@ var iOSTouch1 = (function() {
     var d = function() {
         c.removeEventListener(a, d, true);
         f = true;
-    }
-    ;
+    };
+    
     try {
-        c.addEventListener(a, d, true);
+//        c.addEventListener(a, d, true);
         var e = document.createEvent("TouchEvent");
         e.initTouchEvent(a);
-        c.dispatchEvent(e);
         return f;
     } catch (b) {
         alert(b);
     }
-    d();
+//    d();
     return false;
 }
 )();
