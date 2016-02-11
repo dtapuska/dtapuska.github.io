@@ -12,6 +12,7 @@ window.addEventListener('wheel', function(e) {
   console.log(e);
   pausecomp(1000);
   e.preventDefault();
+  document.getElementById('foo').style.background = "yellow";
 }, {'passive': true} );
 //window.addEventListener('wheel', function(e) {
 //  console.log(Date.now());
@@ -20,7 +21,5 @@ window.addEventListener('wheel', function(e) {
 //  e.preventDefault();
 //}, {} );
 </script>
-<div style="height: 2000px; background: red; width: 40px">
-</div>
-<div style="height: 2000px; background: green; width: 50px">
-</div>
+<div style="height: 2000px; background: red; width: 40px" id="foo"></div>
+<div style="height: 2000px; background: green; width: 40px"></div>
