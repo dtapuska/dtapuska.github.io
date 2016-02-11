@@ -1,0 +1,24 @@
+<script>
+function pausecomp(millis)
+ {
+  var date = new Date();
+  var curDate = null;
+  do { curDate = new Date(); }
+  while(curDate-date < millis);
+}
+
+window.addEventListener('wheel', function(e) {
+  console.log(Date.now());
+  console.log(e);
+  pausecomp(1000);
+  e.preventDefault();
+}, {'passive': true} );
+//window.addEventListener('wheel', function(e) {
+//  console.log(Date.now());
+//  pausecomp(2000);
+//  console.log(e);
+//  e.preventDefault();
+//}, {} );
+</script>
+<div style="height: 2000px; background: red; width: 40px">
+</div>
