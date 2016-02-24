@@ -1,0 +1,18 @@
+<style>
+#notice {
+  background: grey;
+  width: 50px;
+  height: 50px;
+}
+</style>
+<script>
+document.addEventListener('mousewheel', function(e) {
+  document.getElementById('notice').style.background = "red";
+});
+</script>
+Scroll one tick when the mouse is on the iframe; the grey div
+below should not change to red.
+<div id="notice"></div>
+<iframe src="iframe-scroll-child.html" border=4 id="myframe" height=400>
+You can't see iFrames  :(
+</iframe>
