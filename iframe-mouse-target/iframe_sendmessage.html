@@ -1,0 +1,8 @@
+    IFrame - click me
+  
+ <script>
+                  window.addEventListener('click', function(e) {
+  console.log(e);
+  window.top.postMessage('clicked', 'http://output.jsbin.com');
+});
+                  </script>
