@@ -1,0 +1,22 @@
+<script>
+function pausecomp(millis)
+ {
+  var date = new Date();
+  var curDate = null;
+  do { curDate = new Date(); }
+  while(curDate-date < millis);
+}
+
+window.addEventListener('touchstart', function(e) {
+  console.log(Date.now());
+  console.log(e);
+  pausecomp(5000);
+  console.log("After");
+  document.getElementById('foo').style.background = "yellow";
+}, {'passive': false} );
+window.addEventListener('touchmove', function(e) {
+  console.log("Move");
+}, {'passive': false});
+</script>
+<div style="height: 2000px; background: red; width: 40px" id="foo"></div>
+<div style="height: 2000px; background: green; width: 40px"></div>
