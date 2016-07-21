@@ -51,7 +51,7 @@ function toPointerEvent(inType, inDict) {
   e.buttons = inDict.buttons || 0;
 
   e.clientX = inDict.touches[0].pageX;
-  e.clientY = inDict.touches[0].pageX;
+  e.clientY = inDict.touches[0].pageY;
 
   // Spec requires that pointers without pressure specified use 0.5 for down
   // state and 0 for up state.

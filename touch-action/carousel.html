@@ -110,8 +110,8 @@ content.addEventListener("pointerdown", function(e) {
 });
 
 content.addEventListener("pointermove", function(e) {
-  var lengthY = e.clientX - startX;
-  var lengthX = e.clientY - startY;
+  var lengthX = e.clientX - startX;
+  var lengthY = e.clientY - startY;
 
   if (Math.abs(lengthY) > Math.abs(lengthX)) {
     return;
