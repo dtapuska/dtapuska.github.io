@@ -1,0 +1,19 @@
+<button onclick="doRequestFullscreen();">Show Alert</button>
+<button onclick="removeSandbox();">Remove Sandbox</button>
+<div id="status"></div>
+
+<script>
+  function removeSandbox() {
+      parent.document.getElementById('theiframe').removeAttribute('sandbox');
+      history.go(0);
+  }
+
+  function doRequestFullscreen() {
+      var before = performance.now();
+      window.alert("If you see this you aren't sanboxed! You've just seen a demonstration how 'allow-scripts and allow-same-origin' is not very helpful.");
+      var after = performance.now();
+      if (after - before < 500) {
+        document.getElementById('status').innerHTML = "Looks like you are sandboxed, click remove and try again!";
+      }
+  }
+</script>
