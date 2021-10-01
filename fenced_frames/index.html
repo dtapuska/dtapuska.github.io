@@ -11,10 +11,11 @@ function navFrame(url) {
 
 Frame 1:<br>
 <fencedframe
-    id="frame1" src="data:text/html,Initial page"
-    width=500 height=300></fencedframe><br>
+    id="frame1" src="simple.html"
+    width=1024 height=1024></fencedframe><br>
 <button onclick="navFrame('https://permission.site/')">Go to permission site</button>
 <button onclick="navFrame('simple.html')">Go same-site</button>
+<button onclick="navFrame('data:text/html,Initial page')">Goto data URL</button>
 <p>
 
 </html>
